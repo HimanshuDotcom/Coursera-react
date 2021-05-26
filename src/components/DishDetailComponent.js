@@ -10,7 +10,7 @@ class Dishdetail extends Component {
                 return (
                     <li>
                         <p>{item.message}</p>
-                        <p>--{item.author}, {item.date}</p>
+                        <p>--{item.author}, { new Intl.DateTimeFormat('en-US',{year: 'numeric', month: 'short', day:'2-digit'}).format(new Date(Date.parse(item.date)))}</p>
                     </li>
                 );
              });
@@ -37,18 +37,20 @@ class Dishdetail extends Component {
 
         if(this.props.dish != null) {
             return (
-                <div className = "row">
-                    <div className = "col-12 col-md-5 m-1">
-                        <Card>
-                            <CardImg width = "100%" src = {this.props.dish.image} alt = {this.props.dish.name} />
-                            <CardBody>
-                                <CardTitle>{this.props.dish.name}</CardTitle>
-                                <CardText>{this.props.dish.description}</CardText>
-                            </CardBody>
-                        </Card>
+                <div className = "container">
+                    <div className = "row">
+                        <div className = "col-12 col-md-5 m-1">
+                            <Card>
+                                <CardImg width = "100%" src = {this.props.dish.image} alt = {this.props.dish.name} />
+                                <CardBody>
+                                    <CardTitle>{this.props.dish.name}</CardTitle>
+                                    <CardText>{this.props.dish.description}</CardText>
+                                </CardBody>
+                            </Card>
+                        </div>
+                        
+                        {this.renderComments()}
                     </div>
-                    
-                    {this.renderComments()}
                 </div>
             );
         }
