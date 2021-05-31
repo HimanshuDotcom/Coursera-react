@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Card, CardImg,  CardText, CardBody, CardTitle, List, Breadcrumb, BreadcrumbItem } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
 
 function RenderComments({comments}) {
