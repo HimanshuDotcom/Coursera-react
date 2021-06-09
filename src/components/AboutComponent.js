@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 function RenderLeader({Leader}) {
     return (
-        <Media className = "mb-2">
-            <Media left href="#">
-                <Media  object src={Leader.image} alt={Leader.name} />
+        <Media className = "mb-5" tag = "li">
+            <Media left className = "mr-3" href="#">
+                <Media width = "100%"  object src={Leader.image} alt={Leader.name} />
             </Media>
             <Media body>
                 <Media heading>
@@ -19,6 +19,13 @@ function RenderLeader({Leader}) {
                 {Leader.description}
             </Media>
         </Media>
+        // <div className="media">
+        //     <img className="mr-3" src="..." alt="Generic placeholder image" />
+        //     <div className="media-body">
+        //         <h5 className="mt-0">Media heading</h5>
+        //         Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+        //     </div>
+        // </div>
     )
 }
 
@@ -70,7 +77,7 @@ function About(props) {
                     <Card>
                         <CardBody className="bg-faded">
                             <blockquote className="blockquote">
-                                <p className="mb-3">You better cut the pizza in four pieces because
+                                <p>You better cut the pizza in four pieces because
                                     I'm not hungry enough to eat six.</p>
                                 <footer className="blockquote-footer">Yogi Berra,
                                 <cite title="Source Title">The Wit and Wisdom of Yogi Berra,
@@ -82,11 +89,11 @@ function About(props) {
                 </div>
             </div>
             <div className="row row-content">
-                <div className="col-12">
+                <div className="col-12 mb-4">
                     <h2>Corporate Leadership</h2>
                 </div>
                 <div className="col-12">
-                    <Media list>
+                    <Media list className = "p-0">
                         {leaders}
                     </Media>
                 </div>

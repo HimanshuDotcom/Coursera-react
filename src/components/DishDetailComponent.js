@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardImg,  CardText, CardBody, CardTitle, List, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Card, CardImg,  CardText, CardBody, CardTitle,  Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import {Link} from 'react-router-dom';
 
 
@@ -15,9 +15,10 @@ function RenderComments({comments}) {
              });
 
             return (
-                <List  type = "unstyled">
-                    {COMMENTS}
-                </List>
+                // <List  type = "unstyled">
+                //     {COMMENTS}
+                // </List>
+                <div></div>
             );
         }
         else {
