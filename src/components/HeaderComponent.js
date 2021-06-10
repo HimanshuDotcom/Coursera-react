@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
-import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron } from 'reactstrap';
+import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem, Jumbotron, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input, Button  } from 'reactstrap';
 import { NavLink } from 'react-router-dom';
 class Header extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            isModalOpen: false
         }
         this.toggleNav = this.toggleNav.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
 
     toggleNav() {
         this.setState({
             isOpen: !this.state.isOpen
         })
+    }
+
+    toggleModal() {
+        this.setState({
+            isModalOpen: !this.state.isModalOpen
+        })
+    }
+
+    handleLogin(e) {
+        e.preventDefault();
+
+        this.toggleModal();
+        alert(`You are now Logged in ${this.username.value}`);
     }
     render() {
         return (
@@ -41,9 +57,28 @@ class Header extends Component {
                                 </NavLink>
                             </NavItem>
                         </Nav>
+                        <button className = "btn btn-outline-secondary" style = {{outline: 'none'}} onClick = {this.toggleModal}>
+                            <span className = "fa fa-lg fa-sign-in"></span> Log in</button>
                     </Collapse>
                 </Navbar>
                 <Jumbotron>
+                    <Modal isOpen = {this.state.isModalOpen} toggle = {this.toggleModal}>
+                        <ModalHeader>Login</ModalHeader>
+                        <ModalBody>
+                            <Form onSubmit = {this.handleLogin}>
+                                <FormGroup>
+                                    <Label htmlFor = "username">Username</Label>
+                                    <Input type = "text" id = "username" name = "username" innerRef = {(input) => this.username = input}/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor = "password">Password</Label>
+                                    <Input type = "password" id = "password" name = "password" innerRef = {(input) => this.password = input} />
+                                </FormGroup>
+                                <Button type = "submit" value= "submit" color= "primary">Login</Button>
+
+                            </Form>
+                        </ModalBody>
+                    </Modal>
                     <div className="container">
                         <div className = "row row-header">
                             <div className="col-12 col-sm-6">
