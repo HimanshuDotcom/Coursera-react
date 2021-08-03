@@ -151,7 +151,7 @@ function Dishdetail(props) {
             </div>
         )
     }
-    else if(props.errMess) {
+    else if(props.errMess != null) {
         return (
             <div className="container">
                 <div className = "row">
@@ -188,6 +188,15 @@ function Dishdetail(props) {
                 </div>
             </div>
         );
+    }
+    else {
+        return (
+            <div className="container">
+                <div className = "row text-center p-5">
+                    <Loading />
+                </div>
+            </div>
+        )
     }
 }
 

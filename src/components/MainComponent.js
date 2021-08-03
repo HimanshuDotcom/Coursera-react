@@ -49,7 +49,7 @@ class Main extends Component {
             return (
                 <Dishdetail dish = {this.props.dishes.dishes.filter(dish => dish.id === parseInt(match.params.dishid, 10))[0]}
                             isLoading={this.props.dishes.isLoading}
-                            errMess={this.props.dishes.errMess}
+                            errMess={this.props.dishes.errMsg}
                             comments = {this.props.comments.comments.filter(dish => dish.dishId === parseInt(match.params.dishid, 10) )}
                             errMess={this.props.comments.errMess}
                             addComment = {this.props.addComment}
@@ -61,7 +61,7 @@ class Main extends Component {
             return (
                 <Home dish={this.props.dishes.dishes.filter(dish => dish.featured)[0]}
                     dishesLoading = {this.props.dishes.isLoading}
-                    dishesErrMess = {this.props.dishes.errMess}
+                    dishesErrMess = {this.props.dishes.errMsg}
                     promotion={this.props.promotions.promotions.filter(promo => promo.featured)[0]}
                     promosLoading = {this.props.promotions.isLoading}
                     promosErrMess = {this.props.promotions.errMess}
