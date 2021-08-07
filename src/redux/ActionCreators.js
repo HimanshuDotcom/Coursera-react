@@ -2,15 +2,50 @@ import * as ActionTypes from './ActionTypes';
 import { DISHES } from '../shared/dishes';
 import { baseUrl } from '../shared/baseUrl';
 
-export const addComment = (dishId, rating, author, comment) => ({
+export const addComment = (comment) => ({
     type: ActionTypes.ADD_COMMENT,
-    payload: {
+    // payload: {
+    //     dishId: dishId,
+    //     rating: rating,
+    //     author: author,
+    //     comment: comment
+    // }
+    payload: comment
+});
+
+export const postComment = (dishId, rating, author, comment) => (dispatch) => {
+    const newComment = {
         dishId: dishId,
         rating: rating,
         author: author,
         comment: comment
     }
-});
+    newComment.date = new Date().toISOString();
+    return fetch(baseUrl + 'comments', {
+        method: 'POST',
+        body: JSON.stringify(newComment),
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        credentials: 'same-origin'
+    })
+        .then(response => {
+            if(response.ok)
+                return response;
+            else {
+                let error = new Error('Error' + response.status + ': ' + response.statusText);
+                error.response = response;
+                throw error;
+            }
+        },
+        error => {
+            let errmess = new Error(error.message);  // if we don't hear from server
+            throw errmess;
+        })
+        .then(response => response.json())
+        .then(response => dispatch(addComment(response)))
+        .catch(error => {alert('Your comments could not be posted /n Error:' + error.message)})
+}
 
 export const fetchDishes = () => (dispatch) => {
     dispatch(dishesLoading(true));
@@ -31,11 +66,9 @@ export const fetchDishes = () => (dispatch) => {
             let errmess = new Error(error.message);  // if we don't hear from server
             throw errmess;
         })
-        .then(response => {console.log(response);return response.json()})
+        .then(response => response.json())
         .then(dishes => dispatch(addDishes(dishes)))
-        .catch(error => dispatch(dishesFailed(error.message)));
-
-        
+        .catch(error => dispatch(dishesFailed(error.message)));      
 }
 
 export const addDishes = (dishes) => ({

@@ -27,7 +27,7 @@ class CommentForm extends React.Component {
 
     handleSubmit(values) {
         this.toggleModal()
-        this.props.addComment(this.props.dishId, values.rating, values.firstName, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.firstName, values.comment);
     }
 
     render() {
@@ -94,7 +94,7 @@ class CommentForm extends React.Component {
 }
 
 
-function RenderComments({comments, addComment, dishId}) {
+function RenderComments({comments, postComment, dishId}) {
         if(comments != null) {
             const COMMENTS = comments.map((item) => {
                 return (
@@ -108,7 +108,7 @@ function RenderComments({comments, addComment, dishId}) {
             return (
                 <ul  className="list-group list-unstyled">
                     {COMMENTS}
-                    <CommentForm dishId = {dishId} addComment = {addComment} />
+                    <CommentForm dishId = {dishId} postComment = {postComment} />
                 </ul>
             );
         }
@@ -181,7 +181,7 @@ function Dishdetail(props) {
                         <h4 className ="mb-2">Comments</h4>
                         <RenderComments 
                             comments = {props.comments} 
-                            addComment = {props.addComment}
+                            postComment = {props.postComment}
                             dishId = {props.dish.id}
                         />
                     </div>
